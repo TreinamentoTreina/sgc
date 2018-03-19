@@ -28,7 +28,9 @@ class CondominioController extends Controller
      */
     public function index()
     {
-        //
+        $condominios = Condominio::paginate(10);
+
+        return view('condominio.index')->withCondominios($condominios);
     }
 
     /**
@@ -38,7 +40,7 @@ class CondominioController extends Controller
      */
     public function create()
     {
-        return view('condominio.create');
+        return view('condominio.criar');
     }
 
     /**
@@ -62,7 +64,7 @@ class CondominioController extends Controller
 
         $condominio = null;
 
-        DB::transaction(function () use ($request)
+        DB::transaction(function () use ($request, &$condominio)
         {
             //store in the database
             $condominio = new Condominio;            
@@ -132,7 +134,7 @@ class CondominioController extends Controller
                      ->where('condominios.CONDOMINIO_CNPJ', '=', $condominio->CONDOMINIO_CNPJ)                     
                      ->get();
 
-        return view('condominio.show')->withCondominio($condominio)->withTotal($total);
+        return view('condominio.visualizar')->withCondominio($condominio)->withTotal($total);
     }
 
     /**
@@ -143,7 +145,7 @@ class CondominioController extends Controller
      */
     public function edit(Condominio $condominio)
     {
-        //
+        return view('condominio.editar')->withCondominio($condominio);
     }
 
     /**
@@ -166,6 +168,6 @@ class CondominioController extends Controller
      */
     public function destroy(Condominio $condominio)
     {
-        //
+        dd($condominio);
     }
 }

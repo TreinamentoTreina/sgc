@@ -6,27 +6,25 @@
 
   </head>
 
-  <body class="hold-transition skin-yellow sidebar-mini">
+  <body>
 
-    <div class="wrapper">
+    <section id="container" >
 
       @include('partials._navTop')
       
       @include('partials._navSide')
       
-      <div class="content-wrapper"><!-- Content Wrapper. Contains page content -->
+      <section id="main-content">
 
         @include('partials._messages')
 
         @yield('content')
 
-      </div><!-- /.content-wrapper -->
+       </section><!-- /MAIN CONTENT -->
       
-      @include('partials._footer')
+      @include('partials._footer')      
 
-      @include('partials._navBag')
-
-    </div> <!-- ./wrapper -->
+    </section>
       
       @include('partials._javascript')
 
