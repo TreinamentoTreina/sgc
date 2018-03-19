@@ -19,7 +19,13 @@
 			<div class="col-md-12">
 			  <div class="content-panel">
 			      <table class="table table-striped table-advance table-hover">
-			  	  	  <h4><i class="fa fa-angle-right"></i> Condomínios</h4>
+			      		<div class="col-md-10">
+			  	  	  		<h4><i class="fa fa-angle-right"></i> Condomínios</h4>
+			  	  		</div>
+			  	  		<div class="col-md-2">
+							<a href="{{ route('condominio.create') }}" class="btn btn-block btn-primary">Criar Novo Condomínio</a>
+						</div>
+
 			  	  	  <hr>
 			          <thead>
 				          <tr>
