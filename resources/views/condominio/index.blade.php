@@ -32,7 +32,7 @@
 				              <th><i class="fa fa-building"></i> Condomínio</th>
 				              <th> CNPJ</th>
 				              <th class="hidden-phone"> Quantidade de Blocos</th>
-				              <th> Total de Apartamentos</th>
+				              <th class="hidden-phone"> Total de Apartamentos</th>
 				              <th>Ações</th>
 				          </tr>
 			          </thead>
@@ -43,7 +43,7 @@
 					              <td><a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}">{{ $condominio->CONDOMINIO_NOME }}</a></td>
 					              <td>{{ $condominio->CONDOMINIO_CNPJ }}</td>
 					              <td class="hidden-phone">{{ $condominio->CONDOMINIO_QTDADE_BLOCO }}</td>
-					              <td>
+					              <td class="hidden-phone">
 					              	@php
 					              	$int = 0;
 					              	foreach($condominio->blocos as $bloco)
