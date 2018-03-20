@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Criar Novo Condominio')
+@section('title', '| Condomínio | Criar')
 
 @section('stylesheets')
 
@@ -113,7 +113,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-default">Cancelar</button>
+            <a href="{{ route('condominio.index') }}" type="button" class="btn btn-default">Cancelar</a>
             <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
           </div>
           <!-- /.box-footer -->

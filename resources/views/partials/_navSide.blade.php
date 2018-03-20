@@ -27,17 +27,16 @@
 
             <li class="sub-menu">
                 <a href="javascript:;" >
-                    <i class="fa fa-desktop"></i>
-                    <span>UI Elements</span>
+                    <i class="fa fa-users"></i>
+                    <span>Reunião</span>
                 </a>
-                <ul class="sub">
-                    <li><a  href="general.html">General</a></li>
-                    <li><a  href="buttons.html">Buttons</a></li>
-                    <li><a  href="panels.html">Panels</a></li>
-                    <li><a  href="font_awesome.html">Font Awesome</a></li>
+                <ul class="sub">                    
+                    <li><a  href="{{ route('reuniao.index') }}">Agendadas</a></li>
+                    <li><a  href="{{ route('reuniao.create') }}">Nova Reuniao</a></li>
                 </ul>
             </li>
-
+            
+            <!--
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class="fa fa-cogs"></i>
@@ -127,6 +126,7 @@
                     <span>Google Maps </span>
                 </a>
             </li>
+        -->
 
         </ul>
         <!-- sidebar menu end-->

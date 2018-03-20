@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Ver Condominio')
+@section('title', '| Ver Condomínio')
 
 @section('stylesheets')
 <!-- Folha de Estilo da Aplicação -->

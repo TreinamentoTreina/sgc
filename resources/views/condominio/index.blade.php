@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Index')
+@section('title', '| Condomínio')
 
 @section('stylesheets')
 
@@ -49,11 +49,12 @@
 					              	foreach($condominio->blocos as $bloco)
 					              	{
 					              		$int += count($bloco->apartamentos);
-					              	}					              	
+					              	}
 					              	@endphp
 					              	{{ $int }}
-					              </td>					              
-					              <td>				                  
+					              </td>
+					              <td>
+					              	  <a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>                  
 					                  <a href="{{ route('condominio.edit', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
 					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></button>
 
