@@ -59,7 +59,13 @@ class CondominioController extends Controller
             'qtdade_bloco' => 'required|integer',
             'qtdade_andares' => 'required|integer',
             'nome_bloco' => 'required|alpha_num|max:1',
-            'qtdade_apartamentos' => 'required|integer'
+            'qtdade_apartamentos' => 'required|integer',
+            "cep" => 'required|integer',
+            "endereco" => 'required|max:255',
+            "numero" => 'required|integer',
+            "bairro" => 'required|max:255',
+            "cidade" => 'required|max:255',
+            "estado" => 'required|max:2',
             ));
 
         $condominio = null;
@@ -72,12 +78,18 @@ class CondominioController extends Controller
             $condominio->CONDOMINIO_CNPJ = $request->cnpj;
             $condominio->CONDOMINIO_NOME = $request->nome_condominio;
             $condominio->CONDOMINIO_QTDADE_BLOCO = $request->qtdade_bloco;
+            $condominio->CONDOMINIO_CEP = $request->cep;
+            $condominio->CONDOMINIO_ENDERECO = $request->endereco;
+            $condominio->CONDOMINIO_NUMERO = $request->numero;
+            $condominio->CONDOMINIO_BAIRRO = $request->bairro;
+            $condominio->CONDOMINIO_CIDADE = $request->cidade;
+            $condominio->CONDOMINIO_ESTADO = $request->estado;
 
             $condominio->save();
 
             $nome_bloco = null;
 
-            if($request->nome_bloco == 'A')
+            if($request->nome_bloco == 'A' && $request->qtdade_bloco <= 26)
             {
                 $nome_bloco = range('A', 'Z');
             } 

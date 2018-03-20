@@ -14,19 +14,19 @@
       
       @include('partials._navSide')
       
-      <section id="main-content">
-
-        @include('partials._messages')
+      <section id="main-content">        
 
         @yield('content')
 
-       </section><!-- /MAIN CONTENT -->
+      </section><!-- /MAIN CONTENT -->
       
       @include('partials._footer')      
 
     </section>
       
       @include('partials._javascript')
+
+      @include('partials._messages')
 
       @yield('scripts')
 

@@ -1,19 +1,21 @@
 @if (Session::has('success'))
 	
-	<div class="alert alert-success" role="alert">
-		<strong>Sucesso:</strong> {{ Session::get('success') }}
-	</div>
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			alertify.notify('{{ Session::get('success') }}', 'success', 5, function(){  });
+		});
+	</script>
+	
 @endif
 
 @if(count($errors) > 0)
 
-	<div class="alert alert-danger" role="alert">
-		<strong>Erros:</strong>
-		<ul>
+	<script type="text/javascript">
+		$( document ).ready(function() {
 			@foreach($errors->all() as $error)
-				<li>{{ $error }}</li>
+			alertify.notify('{{ $error }}', 'errorr', 5, function(){  });
 			@endforeach
-		</ul>
-	</div>
+		});
+	</script>
 
 @endif

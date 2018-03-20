@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Reuniao;
 use Illuminate\Http\Request;
+use Session;
+use DB;
 
 class ReuniaoController extends Controller
 {
@@ -14,7 +16,8 @@ class ReuniaoController extends Controller
      */
     public function index()
     {
-        return view('reuniao.index');
+        $reunioes = Reuniao::paginate(10);
+        return view('reuniao.index')->withReunioes($reunioes);
     }
 
     /**
@@ -35,7 +38,33 @@ class ReuniaoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        #dd($request);
+        // Validate the data
+        $this->validate($request, array(
+            'assunto' => 'required|integer',
+            'data_reuniao' => 'required',
+            'hora_reuniao' => 'required'
+            ));
+
+        $reuniao = null;
+
+        DB::transaction(function () use ($request, &$reuniao)
+        {
+            //store in the database
+            $reuniao = new Reuniao;            
+
+            $reuniao->REUNIAO_ASSUNTO = $request->assunto;
+            $reuniao->REUNIAO_DATA = $reuniao->inverteData($request->data_reuniao);
+            $reuniao->REUNIAO_HORA = $request->hora_reuniao;
+            $reuniao->REUNIAO_FK_CONDOMINIO = "26245509000198";
+
+            $reuniao->save();             
+        });
+
+        Session::flash('success', 'A reunião foi salva com successo!');        
+
+        //redirect to another page
+        return redirect()->route('reuniao.show', $reuniao->REUNIAO_ID);
     }
 
     /**
@@ -45,7 +74,7 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Reuniao $reuniao)
-    {
+    {        
         return view('reuniao.show')->withReuniao($reuniao);
     }
 

@@ -15,10 +15,12 @@
 <script src="{{ asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <!-- ChartJS -->
 <script src="{{ asset('bower_components/chart.js/Chart.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js') }}"></script>
+<!-- AdminLTE for demo purposes 
+<script src="{{ asset('dist/js/demo.js') }}"></script>-->
 <!-- iCheck 1.0.1 -->
 <script src="{{ asset('iCheck/icheck.min.js') }}"></script>
+<!-- Alertify -->
+<script src="{{ asset('alertifyjs/alertify.min.js') }}"></script>
 
 <script src="{{ asset('theme/js/jquery-ui-1.9.2.custom.min.js') }}"></script>
 <script src="{{ asset('theme/js/jquery.ui.touch-punch.min.js') }}"></script>

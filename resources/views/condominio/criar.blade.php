@@ -63,9 +63,51 @@
               <div class="col-sm-6">
                 <select class="form-control" id="nome_bloco" name="nome_bloco" required>
                   <option value="">Selecione...</option>
-                  <option value="A">Letras (A, B, C...)</option>
+                  <option value="A">Letras (A, B, C...) Até 26 blocos</option>
                   <option value="1">Numeros (1, 2, 3...)</option>
                 </select>                    
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Cep</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="cep" name="cep" placeholder="31800000" required maxlength="8">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Endereço</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Rua das Conchas" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Número</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="numero" name="numero" placeholder="50" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Bairro</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Das conhcas" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Cidade</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Belo Horizonte" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Estado</label>
+
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="estado" name="estado" placeholder="MG" required>
               </div>
             </div>
           </div>
@@ -84,6 +126,54 @@
 @endsection
 
 @section('scripts')
+<script type="text/javascript">
+  $("#cep").on('keyup blur', function(e) {
+    var cep = $(this).val();
+    if(cep.length == 8) 
+    {
+      var urlCep = "https://viacep.com.br/ws/" + cep + "/json/";
 
+          $.ajax({
+              url: urlCep,
+              type: 'get',                                                
+              dataType: 'json',
+              success: function(response) 
+              {
+                if(response.erro)
+                {
+                  alertify.notify('Busca de endereco sem Sucesso!', 'error', 5, function(){ });
+
+                  $("#endereco").val('');
+                  $("#numero").val('');
+                  $("#bairro").val('');
+                  $("#cidade").val('');
+                  $("#estado").val('');                      
+                }
+                else
+                {
+                  var japreenchido = $('#endereco').val();
+
+                  if (!japreenchido) 
+                  {                     
+                    alertify.notify('Busca de endereco realizada com sucesso!', 'success', 5, function(){  });
+                        
+                    $("#endereco").val(response.logradouro);
+                    $("#numero").val('');
+                    $("#bairro").val(response.bairro);
+                    $("#cidade").val(response.localidade);
+                    $("#estado").val(response.uf);  
+                  }
+                }
+              }
+          });
+    } else {
+      $("#endereco").val('');
+      $("#numero").val('');
+      $("#bairro").val('');
+      $("#cidade").val('');
+      $("#estado").val(''); 
+    }
+  });
+</script>
 	
 @endsection

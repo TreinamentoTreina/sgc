@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="{{ asset('bower_components/jvectormap/jquery-jvectormap.css') }}">
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="{{ asset('iCheck/all.css') }}">
+<!-- Alertify -->
+<link rel="stylesheet" href="{{ asset('alertifyjs/css/alertify.min.css') }}">
+<!-- Default theme -->
+<link rel="stylesheet" href="{{ asset('alertifyjs/css/themes/default.min.css') }}"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="{{ asset('alertifyjs/css/themes/semantic.min.css') }}"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="{{ asset('alertifyjs/css/themes/bootstrap.min.css') }}"/>
 
 <!-- Custom styles for this template -->
 <link href="{{ asset('theme/css/style.css') }}" rel="stylesheet">
