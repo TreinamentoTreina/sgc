@@ -12,7 +12,7 @@
 		
 		<br>
       	<ol class="breadcrumb">
-			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active">Condominio</li>			
 		</ol>
       	<div class="row mt">
@@ -54,34 +54,8 @@
 					              	{{ $int }}
 					              </td>
 					              <td>
-					              	  <a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>                  
-					                  <a href="{{ route('condominio.edit', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></button>
-
-										
-										<div id="myModal" class="modal fade" role="dialog">
-										  <div class="modal-dialog">
-
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <button type="button" class="close" data-dismiss="modal">&times;</button>
-										        <h4 class="modal-title">Solicitação de exclusão do condomínio <strong>{{ $condominio->CONDOMINIO_NOME }} - CNPJ: {{ $condominio->CONDOMINIO_CNPJ }}</strong></h4>
-										      </div>
-										      <div class="modal-body">
-										        <p>Tem certeza que deseja excluir o Condomínio?</p>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Sair</button>
-									            <form method="POST" action="{{ route('condominio.destroy', $condominio->CONDOMINIO_CNPJ) }}" accept-charset="UTF-8">
-									            	<input name="_method" type="hidden" value="DELETE">
-									            	{{ csrf_field() }}
-									            	<input class="btn btn-danger pull-right" type="submit" value="Excluir">
-									            </form>
-										      </div>
-										    </div>
-
-										  </div>
-										</div>
+					              	  <a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i>Ver</a>                  
+					                  <a href="{{ route('condominio.edit', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i>Editar</a>
 					              </td>
 					          </tr>
 					         @endforeach

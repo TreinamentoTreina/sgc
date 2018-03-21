@@ -15,6 +15,11 @@ class Reuniao extends Model
         return $this->belongsTo(Reuniao::class,'REUNIAO_FK_CONDOMINIO','CONDOMINIO_CNPJ');
     }
 
+    public function assunto()
+    {  
+        return $this->belongsTo(Assunto::class,'REUNIAO_ASSUNTO','ASSUNTO_ID');
+    }
+
     public function inverteData($data)
     {
 	    if(count(explode("/",$data)) > 1)

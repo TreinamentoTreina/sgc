@@ -8,7 +8,7 @@
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <!--link rel="shortcut icon" href="../../../../../alvarez.is/demo/dashio/favicon.html"-->
 
-    <title>DASHIO - Bootstrap Admin + Front-End template</title>
+    <title>SGC | Entrar</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('theme/css/bootstrap.css') }}" rel="stylesheet">
@@ -27,14 +27,8 @@
   </head>
 
   <body>
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-
       <div id="login-page">
-        <div class="container">
-        
+        <div class="container">        
               <form class="form-login" method="POST" action="{{ route('login') }}">
                 @csrf
                 <h2 class="form-login-heading">{{ __('Entrar') }}</h2>
@@ -57,23 +51,24 @@
                     <label class="checkbox">
                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Lembrar de mim') }}
                         <span class="pull-right">
-                            <a data-toggle="modal" href="login.html#myModal"> {{ __('Esqueceu sua senha?') }}</a>
+                            <a data-toggle="modal" href="#myModal"> {{ __('Esqueceu sua senha?') }}</a>
         
                         </span>
                     </label>
-                    <button class="btn btn-theme btn-block" href="index-2.html" type="submit"><i class="fa fa-lock"></i> Entrar</button>
+                    <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> Entrar</button>
                     <hr>                    
                     
                     <div class="registration">
                         Não tem conta ainda?<br/>
-                        <a class="" href="#">
+                        <a class="" href="{{ route('register') }}">
                             Criar uma conta
                         </a>
-                    </div>
-        
+                    </div>        
                 </div>
+              </form> 
         
-                  <!-- Modal -->
+              <form class="form-login" method="POST" action="{{ route('password.email') }}">
+                @csrf
                   <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
                       <div class="modal-dialog">
                           <div class="modal-content">
@@ -83,20 +78,17 @@
                               </div>
                               <div class="modal-body">
                                   <p>Digite seu email abaixo para redefinir sua senha.</p>
-                                  <input type="text" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                                  <input type="email" id="email" placeholder="Email" name="email" autocomplete="off" class="form-control placeholder-no-fix" required>
         
                               </div>
                               <div class="modal-footer">
                                   <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                                  <button class="btn btn-theme" type="button">Submit</button>
+                                  <button class="btn btn-theme" type="submit">Submit</button>
                               </div>
                           </div>
                       </div>
                   </div>
-                  <!-- modal -->
-        
-              </form>       
-        
+              </form>
         </div>
       </div>
 
@@ -111,6 +103,4 @@
         $.backstretch("{{ asset('theme/img/login3-bg.jpg') }}", {speed: 500});
     </script>
   </body>
-
-<!-- Mirrored from blacktie.co/demo/premium/dashio/dashboard/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 18 Mar 2018 22:42:38 GMT -->
 </html>

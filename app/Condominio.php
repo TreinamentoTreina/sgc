@@ -14,10 +14,5 @@ class Condominio extends Model
     public function blocos()
 	{
 		return $this->hasMany(Bloco::class, 'BLOCO_FK_CONDOMINIO');
-	}
-
-	public function reunioes()
-	{
-		return $this->hasMany(Reuniao::class, 'REUNIAO_FK_CONDOMINIO');
-	}
+	}	
 }

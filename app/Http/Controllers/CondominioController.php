@@ -156,7 +156,7 @@ class CondominioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Condominio $condominio)
-    {
+    {        
         return view('condominio.editar')->withCondominio($condominio);
     }
 
@@ -169,7 +169,36 @@ class CondominioController extends Controller
      */
     public function update(Request $request, Condominio $condominio)
     {
-        //
+        #dd($request);
+
+        // Validate the data
+        $this->validate($request, array(
+            "nome_condominio" => 'required|max:255',            
+            "cep" => 'required|integer',
+            "endereco" => 'required|max:255',
+            "numero" => 'required|integer',
+            "bairro" => 'required|max:255',
+            "cidade" => 'required|max:255',
+            "estado" => 'required|max:2',
+            ));        
+
+        DB::transaction(function () use ($request, &$condominio)
+        {            
+            $condominio->CONDOMINIO_NOME = $request->nome_condominio;
+            $condominio->CONDOMINIO_CEP = $request->cep;
+            $condominio->CONDOMINIO_ENDERECO = $request->endereco;
+            $condominio->CONDOMINIO_NUMERO = $request->numero;
+            $condominio->CONDOMINIO_BAIRRO = $request->bairro;
+            $condominio->CONDOMINIO_CIDADE = $request->cidade;
+            $condominio->CONDOMINIO_ESTADO = $request->estado;
+
+            $condominio->save();
+        });
+
+        Session::flash('success', 'O Condominio foi editado com successo!');
+
+        //redirect to another page
+        return redirect()->route('condominio.show', $request->cnpj);
     }
 
     /**

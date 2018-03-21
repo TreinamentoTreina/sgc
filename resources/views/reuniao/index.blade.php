@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Reuniao | Index')
+@section('title', '| Reuniao')
 
 @section('stylesheets')
 
@@ -12,7 +12,7 @@
 		
 		<br>
       	<ol class="breadcrumb">
-			<li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
 			<li class="active">Reunião</li>			
 		</ol>
       	<div class="row mt">
@@ -40,7 +40,7 @@
 			          	@if($reunioes)
 			          		@foreach($reunioes as $reuniao)
 					          <tr>
-					              <td class="hidden-phone">{{ $reuniao->REUNIAO_ASSUNTO }}</td>
+					              <td class="hidden-phone">{{ $reuniao->assunto->ASSUNTO_DESCRICAO }}</td>
 					              <td>{{ $reuniao->inverteData($reuniao->REUNIAO_DATA) }}</td>
 					              <td>{{ $reuniao->REUNIAO_HORA }}</td>
 					              <td>
@@ -54,10 +54,10 @@
 					              	@endphp					              	
 					              </td>					              
 					              <td>
-					              	  <a href="{{ route('reuniao.show', $reuniao->REUNIAO_ID) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>
-					                  <a href="{{ route('reuniao.edit', $reuniao->REUNIAO_ID) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+					              	  <a href="{{ route('reuniao.show', $reuniao->REUNIAO_ID) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Ver</a>
+					                  <a href="{{ route('reuniao.edit', $reuniao->REUNIAO_ID) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Editar</a>
 
-					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></button>
+					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash "></i> Apagar</button>
 										<div id="myModal" class="modal fade" role="dialog">
 										  <div class="modal-dialog">
 

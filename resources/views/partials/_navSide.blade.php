@@ -8,32 +8,31 @@
             </div>
               
             <li class="mt">
-                <a href="index-2.html">
+                <a href="{{ route('dashboard.index') }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="sub-menu">
-                <a href="javascript:;" >
+            <li class="menu">
+                <a href="{{ route('condominio.index') }}">
                     <i class="fa fa-building"></i>
                     <span>Condomínio</span>
                 </a>
-                <ul class="sub">
-                    <li><a  href="{{ route('condominio.index') }}">Index</a></li>
-                    <li><a  href="{{ route('condominio.create') }}">Novo</a></li>
-                </ul>
-            </li>
+            </li>            
 
-            <li class="sub-menu">
-                <a href="javascript:;" >
+            <li class="menu">
+                <a href="{{ route('reuniao.index') }}" >
                     <i class="fa fa-users"></i>
                     <span>Reunião</span>
+                </a>                
+            </li>
+
+            <li class="menu">
+                <a href="{{ route('assunto.index') }}">
+                    <i class="fa fa-tags"></i>
+                    <span>Assunto</span>
                 </a>
-                <ul class="sub">                    
-                    <li><a  href="{{ route('reuniao.index') }}">Agendadas</a></li>
-                    <li><a  href="{{ route('reuniao.create') }}">Nova Reuniao</a></li>
-                </ul>
             </li>
             
             <!--

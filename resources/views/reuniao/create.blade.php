@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Criar Novo Condomino')
+@section('title', '| Criar Nova Reunião')
 
 @section('stylesheets')
 <!-- bootstrap datepicker -->
@@ -13,8 +13,8 @@
 <section class="wrapper site-min-height">    
     <br>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Reuniao</a></li>
+      <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{ route('reuniao.index') }}">Reuniao</a></li>
       <li class="active">Criar</li>
     </ol>
     <h3><i class="fa fa-angle-right"></i> Nova Reunião - Condomínio Placeholder</h3>
@@ -30,13 +30,9 @@
               <div class="col-sm-6">
                     <select class="form-control" id="assunto" name="assunto" required>
                       <option value="">Selecione...</option>
-                      <option value="1">Segurança</option>
-                      <option value="2">Barulho</option>
-                      <option value="3">Agua</option>
-                      <option value="4">Gas Encando</option>
-                      <option value="5">Reforma dos predios</option>
-                      <option value="6">Pintura das fachadas</option>
-                      <option value="7">Limpeza</option>
+                      @foreach($assuntos as $assunto)
+                      <option value="{{ $assunto->ASSUNTO_ID }}">{{ $assunto->ASSUNTO_DESCRICAO }}</option>                      
+                      @endforeach
                     </select>                    
                   </div>     
             </div>

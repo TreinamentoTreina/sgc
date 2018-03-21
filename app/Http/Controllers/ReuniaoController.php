@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reuniao;
+use App\Assunto;
 use Illuminate\Http\Request;
 use Session;
 use DB;
@@ -27,7 +28,8 @@ class ReuniaoController extends Controller
      */
     public function create()
     {
-        return view('reuniao.create');
+        $assuntos = Assunto::all();
+        return view('reuniao.create')->withAssuntos($assuntos);
     }
 
     /**

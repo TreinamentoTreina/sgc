@@ -12,13 +12,20 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('dashboard.index');
 });
 
 Auth::routes();
 
-Route::resource('condominio', 'CondominioController');
+Route::resource('condominio', 'CondominioController', ['except' => ['destroy']]);
 
 Route::resource('condomino', 'CondominoController');
 
 Route::resource('reuniao', 'ReuniaoController');
+
+Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);
+
+Route::get('assunto', ['as' => 'assunto.index', 'uses' => 'AssuntoController@index']);
+Route::post('assunto', ['as' => 'assunto.store', 'uses' => 'AssuntoController@store']);
+Route::match(['PUT', 'PATCH'], 'assunto/{assunto}', ['as' => 'assunto.update', 'uses' => 'AssuntoController@update']);
+Route::delete('assunto/{assunto}', ['as' => 'assunto.destroy', 'uses' => 'AssuntoController@destroy']);
