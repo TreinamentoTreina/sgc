@@ -15,11 +15,11 @@
             </li>
 
             <li class="menu">
-                <a href="{{ route('condominio.index') }}">
+                <a  href="{{ route('condominio.index') }}">
                     <i class="fa fa-building"></i>
                     <span>Condomínio</span>
                 </a>
-            </li>            
+            </li>
 
             <li class="menu">
                 <a href="{{ route('reuniao.index') }}" >
