@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Condomino;
 use Illuminate\Http\Request;
+use Session;
+use DB;
 
 class CondominoController extends Controller
 {
@@ -24,7 +26,7 @@ class CondominoController extends Controller
      */
     public function create()
     {
-        return view('condomino.create');
+        return view('condomino.criar');
     }
 
     /**
@@ -34,8 +36,40 @@ class CondominoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        // Validate the data
+        $this->validate($request, array(
+            "nome_condomino" => 'required',
+            "cpf" => 'required',
+            "email" => 'required'
+            ));
+
+        $condomino = null;
+
+        DB::transaction(function () use ($request, &$condomino)
+        {
+            //store in the database
+            $condomino = new Condomino;            
+
+            $condomino->CONDOMINO_CPF = $request->cpf;
+            $condomino->CONDOMINO_NOME = $request->nome_condomino;
+            $condomino->CONDOMINO_EMAIL = $request->email;
+            if(isset($request->sindico))
+            {
+                $condomino->CONDOMINO_SINDICO = $request->sindico;
+            } 
+            else 
+            {
+                $condomino->CONDOMINO_SINDICO = 0;
+            }
+
+            $condomino->save();             
+        });        
+
+        Session::flash('success', 'O condomino foi salvo com successo!');        
+
+        //redirect to another page
+        return redirect()->route('condomino.show', $condomino->CONDOMINO_CPF);
     }
 
     /**
@@ -46,7 +80,7 @@ class CondominoController extends Controller
      */
     public function show(Condomino $condomino)
     {
-        //
+        dd($condomino);
     }
 
     /**

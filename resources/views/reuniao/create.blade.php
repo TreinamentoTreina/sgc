@@ -55,7 +55,7 @@
 
               <div class="col-sm-6">
                 <div class="input-group bootstrap-timepicker timepicker">
-                    <input id="timepicker2" type="text" class="form-control input-small" name="hora_reuniao">
+                    <input id="timepicker2" type="text" class="form-control input-small" name="hora_reuniao" required>
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-time"></i>
                     </span>
@@ -67,7 +67,7 @@
           <!-- /.box-body -->
           <div class="box-footer">
             <a href="{{ route('reuniao.index') }}"><button type="button" class="btn btn-default">Cancelar</button></a>
-            <button type="submit" class="btn btn-info pull-right">Cadastrar</button>
+            <button type="submit" class="btn btn-primary pull-right">Cadastrar</button>
           </div>
           <!-- /.box-footer -->
         </form>

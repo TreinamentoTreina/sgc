@@ -17,7 +17,7 @@ class ReuniaoController extends Controller
      */
     public function index()
     {
-        $reunioes = Reuniao::paginate(10);
+        $reunioes = Reuniao::orderBy("REUNIAO_DATA")->paginate(10);
         return view('reuniao.index')->withReunioes($reunioes);
     }
 
@@ -39,8 +39,7 @@ class ReuniaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        #dd($request);
+    {        
         // Validate the data
         $this->validate($request, array(
             'assunto' => 'required|integer',
@@ -61,7 +60,7 @@ class ReuniaoController extends Controller
             $reuniao->REUNIAO_FK_CONDOMINIO = "26245509000198";
 
             $reuniao->save();             
-        });
+        });        
 
         Session::flash('success', 'A reunião foi salva com successo!');        
 
@@ -88,7 +87,8 @@ class ReuniaoController extends Controller
      */
     public function edit(Reuniao $reuniao)
     {
-        return view('reuniao.create')->withReuniao($reuniao);
+        $assuntos = Assunto::all();
+        return view('reuniao.edit')->withReuniao($reuniao)->withAssuntos($assuntos);
     }
 
     /**
@@ -100,7 +100,27 @@ class ReuniaoController extends Controller
      */
     public function update(Request $request, Reuniao $reuniao)
     {
-        //
+        // Validate the data
+        $this->validate($request, array(
+            'assunto' => 'required|integer',
+            'data_reuniao' => 'required',
+            'hora_reuniao' => 'required'
+            ));        
+
+        DB::transaction(function () use ($request, &$reuniao)
+        {
+            $reuniao->REUNIAO_ASSUNTO = $request->assunto;
+            $reuniao->REUNIAO_DATA = $reuniao->inverteData($request->data_reuniao);
+            $reuniao->REUNIAO_HORA = $request->hora_reuniao;
+            $reuniao->REUNIAO_FK_CONDOMINIO = "26245509000198";
+
+            $reuniao->save();             
+        });        
+
+        Session::flash('success', 'A reunião foi editada com successo!');        
+
+        //redirect to another page
+        return redirect()->route('reuniao.show', $reuniao->REUNIAO_ID);
     }
 
     /**
@@ -111,6 +131,19 @@ class ReuniaoController extends Controller
      */
     public function destroy(Reuniao $reuniao)
     {
-        //
+        DB::beginTransaction();
+        try 
+        {
+            $reuniao->delete();
+            DB::commit();
+            Session::flash('success', 'A reunião foi deletada com sucesso.');
+            return redirect()->route('reuniao.index');
+        } 
+        catch (\Exception $e) 
+        {
+            DB::rollback();
+            Session::flash('error', 'Erro ao excluir reuniao');
+            return redirect()->route('reuniao.index');
+        }        
     }
 }
