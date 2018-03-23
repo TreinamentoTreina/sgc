@@ -41,7 +41,8 @@ class CondominoController extends Controller
         $this->validate($request, array(
             "nome_condomino" => 'required',
             "cpf" => 'required',
-            "email" => 'required'
+            "email" => 'required',
+            "apartamento" => 'required|integer'
             ));
 
         $condomino = null;
@@ -62,6 +63,7 @@ class CondominoController extends Controller
             {
                 $condomino->CONDOMINO_SINDICO = 0;
             }
+            $condomino->CONDOMINO_FK_APARTAMENTO = $request->apartamento;
 
             $condomino->save();             
         });        

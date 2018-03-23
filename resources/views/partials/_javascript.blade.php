@@ -36,3 +36,31 @@
       /*$('select.styled').customSelect();*/
   });
 </script>
+
+<script>
+var urlSegment = "{{request()->segment(1)}}";
+
+$(document).ready(function(){
+
+    limparSelecao();
+
+    if(urlSegment == "dashboard"){
+		$('.dashboard').addClass('active');
+    }else if(urlSegment == "condominio"){
+		$('.condominio').addClass('active');		
+    }else if(urlSegment == "reuniao"){	
+		$('.reuniao').addClass('active');
+    }else if(urlSegment == "assunto"){
+    	$('.assunto').addClass('active');
+    }
+
+    function limparSelecao(){
+
+        $('.dashboard').removeClass('active');
+        $('.condominio').removeClass('active');
+        $('.reuniao').removeClass('active');
+        $('.assunto').removeClass('active');
+
+    }
+});
+</script>

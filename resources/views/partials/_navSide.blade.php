@@ -8,28 +8,28 @@
             </div>
               
             <li class="mt">
-                <a href="{{ route('dashboard.index') }}">
+                <a href="{{ route('dashboard.index') }}" class="dashboard">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="menu">
-                <a  href="{{ route('condominio.index') }}">
+                <a  href="{{ route('condominio.index') }}" class="condominio">
                     <i class="fa fa-building"></i>
                     <span>Condomínio</span>
                 </a>
             </li>
 
             <li class="menu">
-                <a href="{{ route('reuniao.index') }}" >
+                <a href="{{ route('reuniao.index') }}" class="reuniao">
                     <i class="fa fa-users"></i>
                     <span>Reunião</span>
                 </a>                
             </li>
 
             <li class="menu">
-                <a href="{{ route('assunto.index') }}">
+                <a href="{{ route('assunto.index') }}" class="assunto">
                     <i class="fa fa-tags"></i>
                     <span>Assunto</span>
                 </a>

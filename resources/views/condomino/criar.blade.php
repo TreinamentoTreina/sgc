@@ -4,7 +4,6 @@
 
 @section('stylesheets')
 
-
 @endsection
 
 @section('content')
@@ -34,7 +33,7 @@
               <label for="cnpj" class="col-sm-2 control-label">Cadastro de Pessoa Fisica (CPF)</label>
 
               <div class="col-sm-6">
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>                
               </div>
             </div>
             <div class="form-group">
@@ -50,6 +49,19 @@
               <div class="col-sm-6">
                 <input type="email" class="form-control" id="confirmacao_email" placeholder="concha@gmail.com" required>
               </div>
+            </div>            
+            <div class="form-group">
+              <label for="bloco" class="col-sm-2 control-label">Telefone</label>
+
+              <div class="col-sm-6">                
+                <input type="text" class="form-control" data-inputmask='"mask": "(99) 9{4,5}-9{4}"' data-mask id="telefone" name="telefone[]" required>
+              </div>
+              <div class="col-sm-1">
+                <button type="button" class="btn btn-success btn-flat btn-sm pull-left" onclick="addTelefone()"><i class="fa fa-plus fa-1x"></i></button>
+              </div>
+            </div>
+            <div id="addTelefones">
+              
             </div>
             <div class="form-group">
               <label for="bloco" class="col-sm-2 control-label">Sindico?</label>
@@ -57,7 +69,7 @@
               <div class="col-sm-6">
                 <input type="checkbox" class="minimal" id="sindico" name="sindico" value="1">
               </div>
-            </div>                
+            </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
@@ -74,6 +86,12 @@
 @endsection
 
 @section('scripts')
+<!-- InputMask -->
+<script src="{{ asset('plugins/dist/jquery.inputmask.bundle.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone-be.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone-ru.js') }}"></script>
+
 <script type="text/javascript">
   //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
@@ -90,5 +108,32 @@
         return false;
       } else return true;
     }
+    var i = 1;
+
+    function addTelefone()
+    {      
+      $("#addTelefones").append('<div class="form-group" id="tel'+i+'">' +
+              '<label for="bloco" class="col-sm-2 control-label">Telefone</label>' +
+              '<div class="col-sm-6">' +
+                '<input type="text" class="form-control" id="telefone'+i+'" name="telefone[]" required>' +
+              '</div>' +
+              '<div class="col-sm-1">' +
+                '<button type="button" class="btn btn-danger btn-flat btn-sm pull-left" id="'+i+'" onclick="removerTelefone(this.id)"><i class="fa fa-minus fa-1x"></i></button>' +
+              '</div>' +
+            '</div>');
+      i++;
+      id = "#telefone" + i;
+      alert(id);
+      $(id).inputmask("(99) 9{4,5}-9{4}");
+    }
+
+    function removerTelefone(id)
+    {
+      var id = "#tel" + id;
+      $(id).remove();
+    }
+
+
+    $('[data-mask]').inputmask();
 </script>
 @endsection
