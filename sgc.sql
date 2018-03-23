@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Mar-2018 às 18:57
+-- Generation Time: 23-Mar-2018 às 22:35
 -- Versão do servidor: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `apartamentos` (
-  `APTO_ID` int(11) NOT NULL,
+  `APTO_ID` int(10) UNSIGNED NOT NULL,
   `APTO_NUMERO` int(4) UNSIGNED NOT NULL,
   `APTO_FK_BLOCO` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -118,7 +118,65 @@ INSERT INTO `apartamentos` (`APTO_ID`, `APTO_NUMERO`, `APTO_FK_BLOCO`) VALUES
 (77, 401, 5),
 (78, 402, 5),
 (79, 403, 5),
-(80, 404, 5);
+(80, 404, 5),
+(81, 101, 6),
+(82, 102, 6),
+(83, 201, 6),
+(84, 202, 6),
+(85, 301, 6),
+(86, 302, 6),
+(87, 101, 7),
+(88, 102, 7),
+(89, 201, 7),
+(90, 202, 7),
+(91, 301, 7),
+(92, 302, 7),
+(93, 101, 8),
+(94, 102, 8),
+(95, 201, 8),
+(96, 202, 8),
+(97, 301, 8),
+(98, 302, 8),
+(99, 101, 9),
+(100, 102, 9),
+(101, 201, 9),
+(102, 202, 9),
+(103, 301, 9),
+(104, 302, 9),
+(105, 401, 9),
+(106, 402, 9),
+(107, 101, 10),
+(108, 102, 10),
+(109, 201, 10),
+(110, 202, 10),
+(111, 301, 10),
+(112, 302, 10),
+(113, 401, 10),
+(114, 402, 10),
+(115, 101, 11),
+(116, 102, 11),
+(117, 201, 11),
+(118, 202, 11),
+(119, 301, 11),
+(120, 302, 11),
+(121, 401, 11),
+(122, 402, 11),
+(123, 101, 12),
+(124, 102, 12),
+(125, 201, 12),
+(126, 202, 12),
+(127, 301, 12),
+(128, 302, 12),
+(129, 401, 12),
+(130, 402, 12),
+(131, 101, 13),
+(132, 102, 13),
+(133, 201, 13),
+(134, 202, 13),
+(135, 301, 13),
+(136, 302, 13),
+(137, 401, 13),
+(138, 402, 13);
 
 -- --------------------------------------------------------
 
@@ -138,7 +196,9 @@ CREATE TABLE `assunto_reunioes` (
 INSERT INTO `assunto_reunioes` (`ASSUNTO_ID`, `ASSUNTO_DESCRICAO`) VALUES
 (1, 'Segurança'),
 (2, 'Gás Encanado'),
-(4, 'Barulho');
+(4, 'Barulho'),
+(5, 'Conversa após 22 horas'),
+(8, 'Tec Web Ed');
 
 -- --------------------------------------------------------
 
@@ -163,7 +223,15 @@ INSERT INTO `blocos` (`BLOCO_ID`, `BLOCO_NOME`, `BLOCO_QTDADE_ANDARES`, `BLOCO_Q
 (2, 'B', 4, 4, 26245509000198),
 (3, 'C', 4, 4, 26245509000198),
 (4, 'D', 4, 4, 26245509000198),
-(5, 'E', 4, 4, 26245509000198);
+(5, 'E', 4, 4, 26245509000198),
+(6, 'A', 3, 2, 12345678000198),
+(7, 'B', 3, 2, 12345678000198),
+(8, 'C', 3, 2, 12345678000198),
+(9, 'A', 4, 2, 12345678000199),
+(10, 'B', 4, 2, 12345678000199),
+(11, 'C', 4, 2, 12345678000199),
+(12, 'D', 4, 2, 12345678000199),
+(13, 'E', 4, 2, 12345678000199);
 
 -- --------------------------------------------------------
 
@@ -188,6 +256,8 @@ CREATE TABLE `condominios` (
 --
 
 INSERT INTO `condominios` (`CONDOMINIO_CNPJ`, `CONDOMINIO_NOME`, `CONDOMINIO_QTDADE_BLOCO`, `CONDOMINIO_CEP`, `CONDOMINIO_ENDERECO`, `CONDOMINIO_NUMERO`, `CONDOMINIO_BAIRRO`, `CONDOMINIO_CIDADE`, `CONDOMINIO_ESTADO`) VALUES
+(12345678000198, 'Tec Web Edit', 3, 30130900, 'Avenida Afonso Pena', '12500', 'Centro', 'Belo Horizonte', 'MG'),
+(12345678000199, 'Tec Web teste', 5, 31980110, 'Rua Walter Ianni', '120', 'São Gabriel', 'Belo Horizonte', 'MG'),
 (26245509000198, 'Residencial Trabalho Integrado', 5, 31370254, 'Avenida Otacílio Negrão de Lima', '50', 'Garças', 'Belo Horizonte', 'MG');
 
 -- --------------------------------------------------------
@@ -200,8 +270,17 @@ CREATE TABLE `condominos` (
   `CONDOMINO_CPF` bigint(11) UNSIGNED ZEROFILL NOT NULL,
   `CONDOMINO_NOME` varchar(255) NOT NULL,
   `CONDOMINO_EMAIL` varchar(191) NOT NULL,
-  `CONDOMINO_SINDICO` tinyint(1) NOT NULL
+  `CONDOMINO_SINDICO` tinyint(1) NOT NULL,
+  `CONDOMINO_FK_USER` int(10) UNSIGNED DEFAULT NULL,
+  `CONDOMINO_FK_APARTAMENTO` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `condominos`
+--
+
+INSERT INTO `condominos` (`CONDOMINO_CPF`, `CONDOMINO_NOME`, `CONDOMINO_EMAIL`, `CONDOMINO_SINDICO`, `CONDOMINO_FK_USER`, `CONDOMINO_FK_APARTAMENTO`) VALUES
+(12345678909, 'Edson L F Santos', 'jesusfreakedson@gmail.com', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -244,8 +323,10 @@ CREATE TABLE `reunioes` (
 --
 
 INSERT INTO `reunioes` (`REUNIAO_ID`, `REUNIAO_ASSUNTO`, `REUNIAO_DATA`, `REUNIAO_HORA`, `REUNIAO_OBSERVACAO`, `REUNIAO_STATUS`, `REUNIAO_ATA`, `REUNIAO_FK_CONDOMINIO`) VALUES
-(1, 1, '2018-03-30', '16:30:00', NULL, 1, NULL, 26245509000198),
-(2, 1, '2018-03-29', '16:30:00', NULL, 1, NULL, 26245509000198);
+(3, 1, '2018-04-05', '20:30:00', NULL, 1, NULL, 26245509000198),
+(5, 2, '2018-04-06', '20:15:00', NULL, 1, NULL, 26245509000198),
+(6, 4, '2018-04-05', '20:30:00', NULL, 1, NULL, 26245509000198),
+(7, 2, '2018-04-19', '20:20:00', NULL, 1, NULL, 26245509000198);
 
 -- --------------------------------------------------------
 
@@ -279,7 +360,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Edson L F Santos', 'jesusfreakedson@gmail.com', '$2y$10$J6JhkKtDrmUbkKO9cjXpmO70q9vH3Z0AdClHuSvgq47996a7UUL9K', 'OIW6KYIGNaJkTj2poYPCJsEc08kcJrqieFC2poyUA7KMEb9Tu4zqTlAGY3ia', '2018-03-12 20:44:35', '2018-03-12 20:44:35');
+(1, 'Edson L F Santos', 'jesusfreakedson@gmail.com', '$2y$10$J6JhkKtDrmUbkKO9cjXpmO70q9vH3Z0AdClHuSvgq47996a7UUL9K', '4gPIGJdQB1D79AYv1EDg0legLwxcZKunr7nwTffAaJ7Gde2FOStJRwtC7cga', '2018-03-12 20:44:35', '2018-03-12 20:44:35'),
+(2, 'Teste', 'teste@teste.com', '$2y$10$TiIDGjXpRThw30iTGFX1Jur.nit2L5msSzEzuAe3gcgUpJDhtCnJC', 'CQ8EZtXKyRQKC8YNJcFQtxLYo1fa66xHwt24c4icFz7o5chdRdCBhyL0XDRx', '2018-03-24 00:35:03', '2018-03-24 00:35:03');
 
 --
 -- Indexes for dumped tables
@@ -316,7 +398,9 @@ ALTER TABLE `condominios`
 --
 ALTER TABLE `condominos`
   ADD PRIMARY KEY (`CONDOMINO_CPF`),
-  ADD UNIQUE KEY `CONDOMINO_EMAIL` (`CONDOMINO_EMAIL`);
+  ADD UNIQUE KEY `CONDOMINO_EMAIL` (`CONDOMINO_EMAIL`),
+  ADD KEY `FK_USER` (`CONDOMINO_FK_USER`),
+  ADD KEY `FK_APARTAMENTO` (`CONDOMINO_FK_APARTAMENTO`);
 
 --
 -- Indexes for table `password_resets`
@@ -352,27 +436,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `apartamentos`
 --
 ALTER TABLE `apartamentos`
-  MODIFY `APTO_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `APTO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 --
 -- AUTO_INCREMENT for table `assunto_reunioes`
 --
 ALTER TABLE `assunto_reunioes`
-  MODIFY `ASSUNTO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ASSUNTO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `blocos`
 --
 ALTER TABLE `blocos`
-  MODIFY `BLOCO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `BLOCO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `reunioes`
 --
 ALTER TABLE `reunioes`
-  MODIFY `REUNIAO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `REUNIAO_ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -388,6 +472,13 @@ ALTER TABLE `apartamentos`
 --
 ALTER TABLE `blocos`
   ADD CONSTRAINT `FK_CONDOMINIO` FOREIGN KEY (`BLOCO_FK_CONDOMINIO`) REFERENCES `condominios` (`CONDOMINIO_CNPJ`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `condominos`
+--
+ALTER TABLE `condominos`
+  ADD CONSTRAINT `FK_APARTAMENTO` FOREIGN KEY (`CONDOMINO_FK_APARTAMENTO`) REFERENCES `apartamentos` (`APTO_ID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_USER` FOREIGN KEY (`CONDOMINO_FK_USER`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `reunioes`
