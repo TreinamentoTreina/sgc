@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', '| Condomínio')
+@section('title', '| Condomino')
 
 @section('stylesheets')
 
@@ -13,66 +13,61 @@
 		<br>
       	<ol class="breadcrumb">
 			<li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Condominio</li>			
+			<li class="active">Condomino</li>			
 		</ol>
       	<div class="row mt">
 			<div class="col-md-12">
 			  <div class="content-panel">
 			      <table class="table table-striped table-advance table-hover">
 			      		<div class="col-md-8">
-			  	  	  		<h4><i class="fa fa-angle-right"></i> Condomínios</h4>
+			  	  	  		<h4><i class="fa fa-angle-right"></i> Condominos</h4>
 			  	  		</div>
 			  	  		<div class="col-md-4">
-							<a href="{{ route('condominio.create') }}" class="btn btn-primary pull-right">Criar Novo Condomínio</a>
+							<a href="{{ route('condomino.create') }}" class="btn btn-primary pull-right">Adicionar Novo</a>
 						</div>
 
 			  	  	  <br>
 			          <thead>
 				          <tr>
-				              <th><i class="fa fa-building"></i> Condomínio</th>
-				              <th> CNPJ</th>
-				              <th class="hidden-phone"> Quantidade de Blocos</th>
-				              <th class="hidden-phone"> Total de Apartamentos</th>
+				              <th> Nome</th>
+				              <th class="hidden-phone"> CPF</th>
+				              <th class="hidden-phone"> Email</th>
+				              <th> Apartamento</th>
 				              <th>Ações</th>
 				          </tr>
 			          </thead>
 			          <tbody>
-			          	@if($condominios)
-			          		@foreach($condominios as $condominio)
+			          	@if($condominos)
+			          	@php
+			          	$i = 1;
+			          	@endphp
+			          		@foreach($condominos as $condomino)
 					          <tr>
-					              <td><a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}">{{ $condominio->CONDOMINIO_NOME }}</a></td>
-					              <td>{{ $condominio->CONDOMINIO_CNPJ }}</td>
-					              <td class="hidden-phone">{{ $condominio->CONDOMINIO_QTDADE_BLOCO }}</td>
-					              <td class="hidden-phone">
-					              	@php
-					              	$int = 0;
-					              	foreach($condominio->blocos as $bloco)
-					              	{
-					              		$int += count($bloco->apartamentos);
-					              	}
-					              	@endphp
-					              	{{ $int }}
-					              </td>
+					              <td>{{ $condomino->CONDOMINO_NOME }}</td>
+					              <td class="hidden-phone">{{ $condomino->CONDOMINO_CPF }}</td>
+					              <td class="hidden-phone">{{ $condomino->CONDOMINO_EMAIL }}</td>
 					              <td>
-					              	  <a href="{{ route('condominio.show', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i></a>                  
-					                  <a href="{{ route('condominio.edit', $condominio->CONDOMINIO_CNPJ) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o "></i></button>
+					              	{{ $condomino->apartamento->bloco->BLOCO_NOME }} - {{ $condomino->apartamento->APTO_NUMERO }}
+					              </td>					              
+					              <td>
+					              	  <a href="{{ route('condomino.show', $condomino->CONDOMINO_CPF) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Ver</a>
+					                  <a href="{{ route('condomino.edit', $condomino->CONDOMINO_CPF) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Editar</a>
 
-										
-										<div id="myModal" class="modal fade" role="dialog">
+					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modalExcluir{{ $i }}"><i class="fa fa-trash "></i> Apagar</button>
+										<div id="modalExcluir{{ $i }}" class="modal fade" role="dialog">
 										  <div class="modal-dialog">
 
 										    <div class="modal-content">
 										      <div class="modal-header">
 										        <button type="button" class="close" data-dismiss="modal">&times;</button>
-										        <h4 class="modal-title">Solicitação de exclusão do condomínio <strong>{{ $condominio->CONDOMINIO_NOME }} - CNPJ: {{ $condominio->CONDOMINIO_CNPJ }}</strong></h4>
+										        <h4 class="modal-title">Solicitação de exclusão do condômino  <strong>{{ $condomino->CONDOMINO_NOME }} do Apartamento {{ $condomino->apartamento->bloco->BLOCO_NOME }} - {{ $condomino->apartamento->APTO_NUMERO }}</strong></h4>
 										      </div>
 										      <div class="modal-body">
-										        <p>Tem certeza que deseja excluir o Condomínio?</p>
+										        <p>Tem certeza que deseja excluir o condômino?</p>
 										      </div>
 										      <div class="modal-footer">
 										        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Sair</button>
-									            <form method="POST" action="{{ route('condominio.destroy', $condominio->CONDOMINIO_CNPJ) }}" accept-charset="UTF-8">
+									            <form method="POST" action="{{ route('condomino.destroy', $condomino->CONDOMINO_CPF) }}" accept-charset="UTF-8">
 									            	<input name="_method" type="hidden" value="DELETE">
 									            	{{ csrf_field() }}
 									            	<input class="btn btn-danger pull-right" type="submit" value="Excluir">
@@ -84,6 +79,9 @@
 										</div>
 					              </td>
 					          </tr>
+					          @php
+					          $i++;
+					          @endphp
 					         @endforeach
 				        @else
 				        	<tr>
@@ -96,4 +94,8 @@
 			</div><!-- /col-md-12 -->
 		</div><!-- /row -->		
 	</section>
+@endsection
+
+@section('scripts')
+
 @endsection

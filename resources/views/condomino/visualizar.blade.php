@@ -1,131 +1,109 @@
 @extends('main')
 
-@section('title', '| Ver Condomínio')
+@section('title', '| Condomínio | Visualizar')
 
 @section('stylesheets')
-<!-- Folha de Estilo da Aplicação -->
-<link rel="stylesheet" href="{{ asset('css/sgc.css') }}" type="text/css" media="all">
+
 @endsection
 
 @section('content')
 
-	<section class="wrapper site-min-height">
-		
-		<br>
-      	<ol class="breadcrumb">
-			<li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="{{ route('condominio.index') }}">Condominio</a></li>
-			<li class="active">Visualizar</li>
-		</ol>
+<section class="wrapper site-min-height">    
+    <br>
+    <ol class="breadcrumb">
+      <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{ route('condomino.index') }}">Condômino</a></li>
+      <li class="active">Visualizar</li>
+    </ol>
+    <h3><i class="fa fa-angle-right"></i> Condômino</h3>
+
+    <div class="row mt">
+      <div class="col-lg-12 col-md-12">
       	<div class="row mt">
       		<div class="col-lg-12 col-md-12">
-				<div class="box box-widget widget-user">
-    				<div class="widget-user-header bg-black" style="background: url({{ asset('dist/img/photo1.png') }}) center center;">
-    					<h3 class="widget-user-username">{{ $condominio->CONDOMINIO_NOME }}</h3>
-    					<h5 class="widget-user-desc">{{ $condominio->CONDOMINIO_CNPJ }}</h5>
-    				</div>
-    				<div class="widget-user-image">
-    					<img class="img-circle" src="{{ asset('dist/img/user8-128x128.jpg') }}" alt="User Avatar">
-    				</div>
-		            <div class="box-footer">
-		              <div class="row">
-		                <div class="col-sm-4 border-right">
-		                  <div class="description-block">
-		                    <h5 class="description-header">{{ $condominio->CONDOMINIO_QTDADE_BLOCO }}</h5>
-		                    <span class="description-text">Quantidade de Blocos</span>
-		                  </div>
-		                </div>
-		                <div class="col-sm-4 border-right">
-		                  <div class="description-block">
-		                    <h5 class="description-header">{{ $condominio->blocos[0]->BLOCO_QTDADE_APTO_POR_ANDAR }}</h5>
-		                    <span class="description-text">Quantidade de Apto por Andar</span>
-		                  </div>
-		                </div>
-		                <div class="col-sm-4">
-		                  <div class="description-block">
-		                    <h5 class="description-header">{{ count($total) }}</h5>
-		                    <span class="description-text">Total de Apartamentos</span>
-		                  </div>
-		                </div>
-		              </div>
-		            </div>
-		        </div>
-
-              	
-				@if($condominio->blocos)
-
-					<div class="row">
-						@foreach($condominio->blocos as $bloco)
-							
-				            <div class="col-sm-6 col-md-4">
-				                <div class="thumbnail">
-
-					                <div class="form-group">
-					                    <div class="col-md-12">
-					                        <br>
-					                        <div class="col-md-6">
-					                            <i class="fa fa-building-o fa-2x"></i>
-					                            <label>Bloco</label>
-					                        </div>
-					                        <div class="col-md-6">
-					                            <input class="form-control" value="{{ $bloco->BLOCO_NOME }}" readonly>
-					                        </div>
-					                    </div>
-					                </div>
-
-					                <div class="form-group">
-					                    <div class="col-md-12">
-					                        <br>
-					                        <div class="col-md-6">
-					                            <i class="fa fa-list-ol fa-2x"></i>
-					                            <label>Andares</label>
-					                        </div>
-					                        <div class="col-md-6">
-					                            <input class="form-control" value="{{ $bloco->BLOCO_QTDADE_ANDARES }}" readonly>
-					                        </div>
-					                    </div>
-					                </div>
-
-					                <div class="col-md-12">
-					                    <legend></legend>
-					                </div>
-					                
-					                @if($bloco->apartamentos)
-					                	@foreach($bloco->apartamentos as $apto)
-							                <div class="col-md-12" style="background-color: #cccccc; padding: 5px; margin: 1px;">
-							                    <div class="col-md-6">
-							                        <label>Apartamento - {{ $apto->APTO_NUMERO }}</label>
-							                    </div>
-							                    <div class="col-md-3">
-							                    	<!--
-							                        <button class="btn btn-default"><i class="fa fa-trash"></i></button>
-							                        <button class="btn btn-default"><i class="fa fa-check"></i></button>
-							                    	-->
-							                    </div>
-							                    <div class="col-md-3" align="right">
-							                        <button class="btn btn-circle btn-success"><i class="fa fa-angle-double-right"></i></button>
-							                    </div>
-							                </div>
-							                
-
-							                <div class="form-group">
-							                    <div class="row">
-							                        
-							                    </div>
-							                </div>
-							            @endforeach
-					                @endif
-				                
-
-
-				                </div>
-				            </div>            
-				        @endforeach
-				    </div>
-		        @endif
-
+    				<div class="col-lg-4 col-md-4 col-sm-4 mb">
+    					<!-- WHITE PANEL - TOP USER -->
+    					<div class="white-panel pn">
+    						<div class="white-header">
+    							<h5>{{ $condomino->apartamento->bloco->BLOCO_NOME }} - {{ $condomino->apartamento->APTO_NUMERO }}</h5>
+    						</div>
+    						<p><img src="{{ asset('theme/img/ui-zac.jpg') }}" class="img-circle" width="50"></p>
+    						<p><b>{{ $condomino->CONDOMINO_NOME }}</b></p>
+    							<div class="row col-md-12">
+    								<div class="col-md-6">
+    									<p class="small">CPF</p>
+    									<p>{{ $condomino->CONDOMINO_CPF }}</p>
+    								</div>
+    								<div class="col-md-6">
+    									<p class="small">EMAIL</p>
+    									<p>{{ $condomino->CONDOMINO_EMAIL }}</p>
+    								</div>
+    							</div>
+    					</div>
+    				</div><!-- /col-md-4 -->
       		</div>
-      	</div>
-		
-	</section>
+      	</div>        
+      </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+      <a href="{{ route('condomino.index') }}"><button type="button" class="btn btn-default">Voltar</button></a>            
+    </div>
+    <!-- /.box-footer -->
+    
+</section>
+
+@endsection
+
+@section('scripts')
+<!-- InputMask -->
+<script src="{{ asset('plugins/dist/jquery.inputmask.bundle.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone-be.js') }}"></script>
+<script src="{{ asset('plugins/dist/inputmask/phone-codes/phone-ru.js') }}"></script>
+
+<script type="text/javascript">
+  //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+
+    function validar () 
+    {
+
+      if($("#email").val() != $("#confirmacao_email").val())
+      {
+        alertify.notify('Os Emails devem ser iguais', 'error', 5, function(){  });
+        return false;
+      } else return true;
+    }
+    var i = 1;
+
+    function addTelefone()
+    {      
+      $("#addTelefones").append('<div class="form-group" id="tel'+i+'">' +
+              '<label for="bloco" class="col-sm-2 control-label">Telefone</label>' +
+              '<div class="col-sm-6">' +
+                '<input type="text" class="form-control" id="telefone'+i+'" name="telefone[]" required>' +
+              '</div>' +
+              '<div class="col-sm-1">' +
+                '<button type="button" class="btn btn-danger btn-flat btn-sm pull-left" id="'+i+'" onclick="removerTelefone(this.id)"><i class="fa fa-minus fa-1x"></i></button>' +
+              '</div>' +
+            '</div>');
+      i++;
+      id = "#telefone" + i;
+      alert(id);
+      $(id).inputmask("(99) 9{4,5}-9{4}");
+    }
+
+    function removerTelefone(id)
+    {
+      var id = "#tel" + id;
+      $(id).remove();
+    }
+
+
+    $('[data-mask]').inputmask();
+</script>
 @endsection

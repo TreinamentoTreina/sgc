@@ -44,13 +44,24 @@ $(document).ready(function(){
 
     limparSelecao();
 
-    if(urlSegment == "dashboard"){
-		$('.dashboard').addClass('active');
-    }else if(urlSegment == "condominio"){
-		$('.condominio').addClass('active');		
-    }else if(urlSegment == "reuniao"){	
-		$('.reuniao').addClass('active');
-    }else if(urlSegment == "assunto"){
+    if(urlSegment == "dashboard")
+    {
+		  $('.dashboard').addClass('active');
+    }
+    else if(urlSegment == "condominio")
+    {
+		  $('.condominio').addClass('active');		
+    }
+    else if(urlSegment == "condomino")
+    {
+      $('.condomino').addClass('active');    
+    }
+    else if(urlSegment == "reuniao")
+    {	
+		  $('.reuniao').addClass('active');
+    }
+    else if(urlSegment == "assunto")
+    {
     	$('.assunto').addClass('active');
     }
 
@@ -58,6 +69,7 @@ $(document).ready(function(){
 
         $('.dashboard').removeClass('active');
         $('.condominio').removeClass('active');
+        $('.condomino').removeClass('active');
         $('.reuniao').removeClass('active');
         $('.assunto').removeClass('active');
 

@@ -22,6 +22,13 @@
             </li>
 
             <li class="menu">
+                <a  href="{{ route('condomino.index') }}" class="condomino">
+                    <i class="fa fa-user"></i>
+                    <span>Condomíno</span>
+                </a>
+            </li>
+
+            <li class="menu">
                 <a href="{{ route('reuniao.index') }}" class="reuniao">
                     <i class="fa fa-users"></i>
                     <span>Reunião</span>

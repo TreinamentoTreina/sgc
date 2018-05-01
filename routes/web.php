@@ -22,6 +22,8 @@ Route::resource('condominio', 'CondominioController', ['except' => ['destroy']])
 Route::resource('condomino', 'CondominoController');
 
 Route::resource('reuniao', 'ReuniaoController');
+Route::match(['PUT', 'PATCH'], 'reuniao/{reuniao}/gerarAta', ['as' => 'reuniao.gerarAta', 'uses' => 'ReuniaoController@gerarAta']);
+Route::match(['PUT', 'PATCH'], 'reuniao/{reuniao}/agendar', ['as' => 'reuniao.agendar', 'uses' => 'ReuniaoController@agendar']);
 
 Route::get('dashboard', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);
 

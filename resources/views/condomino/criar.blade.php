@@ -49,7 +49,21 @@
               <div class="col-sm-6">
                 <input type="email" class="form-control" id="confirmacao_email" placeholder="concha@gmail.com" required>
               </div>
-            </div>            
+            </div>
+            <div class="form-group">
+              <label for="apartamento" class="col-sm-2 control-label">Apartamento</label>
+
+              <div class="col-sm-6">
+                <select class="form-control" id="apartamento" name="apartamento" required>
+                  <option>Selecione...</option>
+                  @foreach($condominio->blocos as $key => $blocos)
+                    @foreach($blocos->apartamentos as $k => $apartamento)
+                      <option value="{{ $apartamento->APTO_ID }}">{{ $apartamento->bloco->BLOCO_NOME }} - {{ $apartamento->APTO_NUMERO }}</option>
+                    @endforeach
+                  @endforeach
+                </select>                
+              </div>
+            </div>
             <div class="form-group">
               <label for="bloco" class="col-sm-2 control-label">Telefone</label>
 

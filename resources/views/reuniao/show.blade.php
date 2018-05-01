@@ -17,7 +17,7 @@
       <li><a href="{{ route('reuniao.index') }}">Reuniao</a></li>
       <li class="active">Visualizar</li>
     </ol>
-    <h3><i class="fa fa-angle-right"></i> Reunião - Agendada</h3>
+    <h3><i class="fa fa-angle-right"></i> Reunião - {{ $reuniao->status->STATUSR_DESCRICAO }}</h3>
 
     <div class="row mt">
       <div class="col-lg-12 col-md-12">
@@ -57,6 +57,26 @@
                 </div>
               </div>
             </div>
+
+            @if($reuniao->status->STATUSR_ID == 2)
+            <div class="form-group">
+              <label for="Ata" class="col-sm-2 control-label">Ata</label>
+
+              <div class="col-sm-6">
+                <textarea class="form-control" readonly name="ata" id="ata" rows="6" style="resize: none;" required>{{ $reuniao->REUNIAO_ATA }}</textarea>
+              </div>     
+            </div>
+            @endif
+
+            @if($reuniao->status->STATUSR_ID == 3)
+            <div class="form-group">
+              <label for="Ata" class="col-sm-2 control-label">Solicitação</label>
+
+              <div class="col-sm-6">
+                <input type="text" name="solicitacao" id="solicitacao" class="form-control" readonly value="{{ $reuniao->REUNIAO_OBSERVACAO }}">                
+              </div>     
+            </div>
+            @endif
 
           </div>
           <!-- /.box-body -->

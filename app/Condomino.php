@@ -15,4 +15,9 @@ class Condomino extends Model
 	{
 		return $this->hasMany(Telefone::class, 'TELEFONE_FK_CONDOMINO');
 	}
+
+	public function apartamento()
+    {
+    	return $this->belongsTo(Apartamento::class, 'CONDOMINO_FK_APARTAMENTO', 'APTO_ID');
+    }
 }

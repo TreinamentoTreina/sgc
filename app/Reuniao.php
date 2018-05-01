@@ -20,6 +20,11 @@ class Reuniao extends Model
         return $this->belongsTo(Assunto::class,'REUNIAO_ASSUNTO','ASSUNTO_ID');
     }
 
+    public function status()
+    {  
+        return $this->belongsTo(StatusReuniao::class,'REUNIAO_STATUS','STATUSR_ID');
+    }
+
     public function inverteData($data)
     {
 	    if(count(explode("/",$data)) > 1)

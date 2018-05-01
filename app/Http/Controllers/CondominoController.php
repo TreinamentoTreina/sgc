@@ -6,6 +6,7 @@ use App\Condomino;
 use Illuminate\Http\Request;
 use Session;
 use DB;
+use App\Condominio;
 
 class CondominoController extends Controller
 {
@@ -16,7 +17,8 @@ class CondominoController extends Controller
      */
     public function index()
     {
-        return view('condomino.index');
+        $condominos = Condomino::paginate(10);
+        return view('condomino.index')->withCondominos($condominos);
     }
 
     /**
@@ -26,7 +28,8 @@ class CondominoController extends Controller
      */
     public function create()
     {
-        return view('condomino.criar');
+        $condominio = Condominio::find(12345678000190);
+        return view('condomino.criar')->withCondominio($condominio);
     }
 
     /**
@@ -82,7 +85,8 @@ class CondominoController extends Controller
      */
     public function show(Condomino $condomino)
     {
-        dd($condomino);
+        #dd($condomino);
+        return view('condomino.visualizar')->withCondomino($condomino);
     }
 
     /**
@@ -93,7 +97,8 @@ class CondominoController extends Controller
      */
     public function edit(Condomino $condomino)
     {
-        //
+        $condominio = Condominio::find(12345678000190);
+        return view('condomino.editar')->withCondomino($condomino)->withCondominio($condominio);
     }
 
     /**
@@ -105,7 +110,36 @@ class CondominoController extends Controller
      */
     public function update(Request $request, Condomino $condomino)
     {
-        //
+        // Validate the data
+        $this->validate($request, array(
+            "nome_condomino" => 'required',
+            "cpf" => 'required',
+            "email" => 'required',
+            "apartamento" => 'required|integer'
+            ));        
+
+        DB::transaction(function () use ($request, &$condomino)
+        {
+            $condomino->CONDOMINO_CPF = $request->cpf;
+            $condomino->CONDOMINO_NOME = $request->nome_condomino;
+            $condomino->CONDOMINO_EMAIL = $request->email;
+            if(isset($request->sindico))
+            {
+                $condomino->CONDOMINO_SINDICO = $request->sindico;
+            } 
+            else 
+            {
+                $condomino->CONDOMINO_SINDICO = 0;
+            }
+            $condomino->CONDOMINO_FK_APARTAMENTO = $request->apartamento;
+
+            $condomino->save();             
+        });        
+
+        Session::flash('success', 'O condomino foi salvo com successo!');        
+
+        //redirect to another page
+        return redirect()->route('condomino.show', $condomino->CONDOMINO_CPF);
     }
 
     /**
@@ -116,6 +150,19 @@ class CondominoController extends Controller
      */
     public function destroy(Condomino $condomino)
     {
-        //
+        DB::beginTransaction();
+        try 
+        {
+            $condomino->delete();
+            DB::commit();
+            Session::flash('success', 'O condomino foi deletado com sucesso.');
+            return redirect()->route('condomino.index');
+        } 
+        catch (\Exception $e) 
+        {
+            DB::rollback();
+            Session::flash('error', 'Erro ao excluir condomino');
+            return redirect()->route('condomino.index');
+        }        
     }
 }

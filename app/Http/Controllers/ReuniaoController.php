@@ -17,7 +17,7 @@ class ReuniaoController extends Controller
      */
     public function index()
     {
-        $reunioes = Reuniao::orderBy("REUNIAO_DATA")->paginate(10);
+        $reunioes = Reuniao::orderByDesc("REUNIAO_DATA")->paginate(10);
         return view('reuniao.index')->withReunioes($reunioes);
     }
 
@@ -145,5 +145,55 @@ class ReuniaoController extends Controller
             Session::flash('error', 'Erro ao excluir reuniao');
             return redirect()->route('reuniao.index');
         }        
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Reuniao  $reuniao
+     * @return \Illuminate\Http\Response
+     */
+    public function gerarAta(Request $request, Reuniao $reuniao)
+    {
+        // Validate the data
+        $this->validate($request, array(
+            'ata' => 'required'
+            ));        
+
+        DB::transaction(function () use ($request, &$reuniao)
+        {
+            $reuniao->REUNIAO_ATA = $request->ata;
+            $reuniao->REUNIAO_STATUS = 2;
+
+            $reuniao->save();             
+        });        
+
+        Session::flash('success', 'A Ata da Reunião foi inserida com successo!');        
+
+        //redirect to another page
+        return redirect()->route('reuniao.show', $reuniao->REUNIAO_ID);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Reuniao  $reuniao
+     * @return \Illuminate\Http\Response
+     */
+    public function agendar(Request $request, Reuniao $reuniao)
+    {
+        DB::transaction(function () use ($request, &$reuniao)
+        {
+            $reuniao->REUNIAO_STATUS = 1;
+
+            $reuniao->save();             
+        });        
+
+        Session::flash('success', 'A Reunião foi agendada com successo!');        
+
+        //redirect to another page
+        return redirect()->route('reuniao.show', $reuniao->REUNIAO_ID);
     }
 }
