@@ -48,7 +48,10 @@ class ReservaAreaComumController extends Controller
             'hora_reserva' => 'required'
             ));
 
+        #$verifica = ReservaAreaComum::where("RESERVA_AREA_DATA_RESERVA", "=", $req);
+
         $reserva = null;
+
 
         DB::transaction(function () use ($request, &$reserva)
         {

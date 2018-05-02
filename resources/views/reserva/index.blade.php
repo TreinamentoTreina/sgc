@@ -49,32 +49,6 @@
 					              <td>{{ $reserva->condomino->CONDOMINO_NOME }}</td>
 					              <td>					              	
 					              	  <a href="{{ route('reserva.show', $reserva->RESERVA_AREA_ID) }}" class="btn btn-default btn-xs"><i class="fa fa-search"></i> Ver</a>
-					                  <a href="{{ route('reserva.edit', $reserva->RESERVA_AREA_ID) }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Editar</a>
-
-					                  <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal{{ $i }}"><i class="fa fa-trash "></i> Apagar</button>
-										<div id="myModal{{ $i }}" class="modal fade" role="dialog">
-										  <div class="modal-dialog">
-
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <button type="button" class="close" data-dismiss="modal">&times;</button>
-										        <h4 class="modal-title">Solicitação de exclusão da reserva do dia  <strong>{{ $reserva->inverteData($reserva->RESERVA_AREA_DATA_RESERVA) }} às {{ $reserva->RESERVA_AREA_HORARIO_INICIO}}</strong></h4>
-										      </div>
-										      <div class="modal-body">
-										        <p>Tem certeza que deseja excluir a Reserva?</p>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Sair</button>
-									            <form method="POST" action="{{ route('reserva.destroy', $reserva->RESERVA_AREA_ID) }}" accept-charset="UTF-8">
-									            	<input name="_method" type="hidden" value="DELETE">
-									            	{{ csrf_field() }}
-									            	<input class="btn btn-danger pull-right" type="submit" value="Excluir">
-									            </form>
-										      </div>
-										    </div>
-
-										  </div>
-										</div>									  
 					              </td>
 					          </tr>
 					          @php

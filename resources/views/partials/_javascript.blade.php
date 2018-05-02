@@ -72,6 +72,10 @@ $(document).ready(function(){
     {
         $('.area').addClass('active');
     }
+    else if(urlSegment == "reserva")
+    {
+        $('.reserva').addClass('active');
+    }
 
     function limparSelecao(){
 
@@ -82,6 +86,7 @@ $(document).ready(function(){
         $('.assunto').removeClass('active');
         $('.reuniaoC').removeClass('active');
         $('.area').removeClass('active');
+        $('.reserva').removeClass('active');
 
     }
 });

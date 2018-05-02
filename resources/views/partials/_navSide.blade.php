@@ -51,6 +51,13 @@
                 </a>
             </li>
 
+            <li class="menu">
+                <a href="{{ route('reserva.index') }}" class="reserva">
+                    <i class="fa fa-child"></i>
+                    <span>Reservar Area Comum</span>
+                </a>                
+            </li>
+
             @elseif(Auth::user()->condomino->CONDOMINO_SINDICO == 0)
             <li class="mt">
                 <a href="{{ route('dashboard.index') }}" class="dashboard">
@@ -63,6 +70,13 @@
                 <a href="{{ route('reuniaoC.index') }}" class="reuniaoC">
                     <i class="fa fa-users"></i>
                     <span>Reunião</span>
+                </a>                
+            </li>
+
+            <li class="menu">
+                <a href="{{ route('reserva.index') }}" class="reserva">
+                    <i class="fa fa-child"></i>
+                    <span>Reservar Area Comum</span>
                 </a>                
             </li>
             @endif
