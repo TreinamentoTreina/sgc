@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function condomino()
+    {  
+        return $this->belongsTo(Condomino::class,'cpf','CONDOMINO_CPF');
+    }
 }

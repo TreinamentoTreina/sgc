@@ -14,10 +14,10 @@
     <br>
     <ol class="breadcrumb">
       <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('reuniao.index') }}">Reuniao</a></li>
+      <li><a href="{{ route('reserva.index') }}">Reserva</a></li>
       <li class="active">Visualizar</li>
     </ol>
-    <h3><i class="fa fa-angle-right"></i> Reunião - {{ $reuniao->status->STATUSR_DESCRICAO }}</h3>
+    <h3><i class="fa fa-angle-right"></i> Reserva</h3>
 
     <div class="row mt">
       <div class="col-lg-12 col-md-12">
@@ -25,19 +25,19 @@
           <div class="box-body">
 
             <div class="form-group">
-              <label for="bloco" class="col-sm-2 control-label">Assunto</label>
+              <label for="bloco" class="col-sm-2 control-label">Area Comum</label>
 
               <div class="col-sm-6">
-                    <input class="form-control" value="{{ $reuniao->assunto->ASSUNTO_DESCRICAO }}" readonly>
+                    <input class="form-control" value="{{ $reserva->areaComum->AREA_COMUM_NOME }}" readonly>
                   </div>     
             </div>
 
             <div class="form-group">
-              <label for="condominio" class="col-sm-2 control-label">Data da Reuniao</label>
+              <label for="condominio" class="col-sm-2 control-label">Data da Reserva</label>
 
               <div class="col-sm-6">
                 <div class="input-group date">
-                  <input type="text" class="form-control pull-right" value="{{ $reuniao->inverteData($reuniao->REUNIAO_DATA) }}" readonly>
+                  <input type="text" class="form-control pull-right" value="{{ $reserva->inverteData($reserva->RESERVA_AREA_DATA_RESERVA) }}" readonly>
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>                      
@@ -46,42 +46,33 @@
             </div>
 
             <div class="form-group">
-              <label for="cnpj" class="col-sm-2 control-label">Hora da Reuniao</label>
+              <label for="cnpj" class="col-sm-2 control-label">Hora da Reserva</label>
 
               <div class="col-sm-6">
                 <div class="input-group bootstrap-timepicker timepicker">
-                    <input type="text" class="form-control input-small" value="{{ $reuniao->REUNIAO_HORA }}" readonly>
+                    <input type="text" class="form-control input-small" value="{{ $reserva->RESERVA_AREA_HORARIO_INICIO }}" readonly>
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-time"></i>
                     </span>
                 </div>
               </div>
             </div>
+            
 
-            @if($reuniao->status->STATUSR_ID == 2)
+            
             <div class="form-group">
-              <label for="Ata" class="col-sm-2 control-label">Ata</label>
+              <label for="reservado_por" class="col-sm-2 control-label">Reservado Por</label>
 
               <div class="col-sm-6">
-                <textarea class="form-control" readonly name="ata" id="ata" rows="6" style="resize: none;" required>{{ $reuniao->REUNIAO_ATA }}</textarea>
+                <textarea class="form-control" readonly name="reservado_por" id="reservado_por" rows="6" style="resize: none;" required>{{ $reserva->condomino->CONDOMINO_NOME }}, {{ $reserva->condomino->apartamento->bloco->BLOCO_NOME }} - {{ $reserva->condomino->apartamento->APTO_NUMERO }}</textarea>
               </div>     
             </div>
-            @endif
-
-            @if($reuniao->status->STATUSR_ID == 3)
-            <div class="form-group">
-              <label for="Ata" class="col-sm-2 control-label">Solicitação</label>
-
-              <div class="col-sm-6">
-                <textarea class="form-control" readonly name="solicitacao" id="solicitacao" rows="6" style="resize: none;" required>{{ $reuniao->REUNIAO_OBSERVACAO }}</textarea>
-              </div>     
-            </div>
-            @endif
+            
 
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <a href="{{ route('reuniao.index') }}"><button type="button" class="btn btn-default">Voltar</button></a>            
+            <a href="{{ route('reserva.index') }}"><button type="button" class="btn btn-default">Voltar</button></a>            
           </div>
           <!-- /.box-footer -->
         </div>

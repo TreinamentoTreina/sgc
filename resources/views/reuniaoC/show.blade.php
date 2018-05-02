@@ -14,7 +14,7 @@
     <br>
     <ol class="breadcrumb">
       <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{ route('reuniao.index') }}">Reuniao</a></li>
+      <li><a href="{{ route('reuniaoC.index') }}">Reuniao</a></li>
       <li class="active">Visualizar</li>
     </ol>
     <h3><i class="fa fa-angle-right"></i> Reunião - {{ $reuniao->status->STATUSR_DESCRICAO }}</h3>
@@ -73,7 +73,7 @@
               <label for="Ata" class="col-sm-2 control-label">Solicitação</label>
 
               <div class="col-sm-6">
-                <textarea class="form-control" readonly name="solicitacao" id="solicitacao" rows="6" style="resize: none;" required>{{ $reuniao->REUNIAO_OBSERVACAO }}</textarea>
+                <input type="text" name="solicitacao" id="solicitacao" class="form-control" readonly value="{{ $reuniao->REUNIAO_OBSERVACAO }}">                
               </div>     
             </div>
             @endif
@@ -81,7 +81,7 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <a href="{{ route('reuniao.index') }}"><button type="button" class="btn btn-default">Voltar</button></a>            
+            <a href="{{ route('reuniaoC.index') }}"><button type="button" class="btn btn-default">Voltar</button></a>            
           </div>
           <!-- /.box-footer -->
         </div>

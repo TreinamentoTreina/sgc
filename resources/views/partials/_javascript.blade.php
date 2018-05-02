@@ -64,6 +64,14 @@ $(document).ready(function(){
     {
     	$('.assunto').addClass('active');
     }
+    else if(urlSegment == "reuniaoC")
+    {
+        $('.reuniaoC').addClass('active');
+    }
+    else if(urlSegment == "area")
+    {
+        $('.area').addClass('active');
+    }
 
     function limparSelecao(){
 
@@ -72,6 +80,8 @@ $(document).ready(function(){
         $('.condomino').removeClass('active');
         $('.reuniao').removeClass('active');
         $('.assunto').removeClass('active');
+        $('.reuniaoC').removeClass('active');
+        $('.area').removeClass('active');
 
     }
 });

@@ -20,4 +20,9 @@ class Condomino extends Model
     {
     	return $this->belongsTo(Apartamento::class, 'CONDOMINO_FK_APARTAMENTO', 'APTO_ID');
     }
+
+    public function usuario()
+    {  
+        return $this->belongsTo(User::class,'CONDOMINO_FK_USER_ID','id');
+    }
 }
