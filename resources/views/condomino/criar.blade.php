@@ -56,8 +56,8 @@
               <div class="col-sm-6">
                 <select class="form-control" id="apartamento" name="apartamento" required>
                   <option>Selecione...</option>
-                  @foreach($condominio->blocos as $key => $blocos)
-                    @foreach($blocos->apartamentos as $k => $apartamento)
+                  @foreach($condominio->blocos as $key => $bloco)
+                    @foreach($bloco->apartamentos as $k => $apartamento)
                       <option value="{{ $apartamento->APTO_ID }}">{{ $apartamento->bloco->BLOCO_NOME }} - {{ $apartamento->APTO_NUMERO }}</option>
                     @endforeach
                   @endforeach

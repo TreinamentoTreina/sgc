@@ -28,7 +28,7 @@ class CondominoController extends Controller
      */
     public function create()
     {
-        $condominio = Condominio::find(12345678000190);
+        $condominio = Condominio::find(26245509000198);
         return view('condomino.criar')->withCondominio($condominio);
     }
 
@@ -58,6 +58,7 @@ class CondominoController extends Controller
             $condomino->CONDOMINO_CPF = $request->cpf;
             $condomino->CONDOMINO_NOME = $request->nome_condomino;
             $condomino->CONDOMINO_EMAIL = $request->email;
+            $condomino->CONDOMINO_FK_USER_ID = 0;
             if(isset($request->sindico))
             {
                 $condomino->CONDOMINO_SINDICO = $request->sindico;
@@ -97,7 +98,7 @@ class CondominoController extends Controller
      */
     public function edit(Condomino $condomino)
     {
-        $condominio = Condominio::find(12345678000190);
+        $condominio = Condominio::find(26245509000198);
         return view('condomino.editar')->withCondomino($condomino)->withCondominio($condominio);
     }
 

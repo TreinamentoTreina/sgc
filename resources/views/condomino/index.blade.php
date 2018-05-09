@@ -43,7 +43,7 @@
 			          	@endphp
 			          		@foreach($condominos as $condomino)
 					          <tr>
-					              <td>{{ $condomino->usuario->id }}</td>
+					              <td>{{ $condomino->CONDOMINO_NOME }}</td>
 					              <td class="hidden-phone">{{ $condomino->CONDOMINO_CPF }}</td>
 					              <td class="hidden-phone">{{ $condomino->CONDOMINO_EMAIL }}</td>
 					              <td>

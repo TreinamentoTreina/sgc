@@ -48,7 +48,18 @@ class ReservaAreaComumController extends Controller
             'hora_reserva' => 'required'
             ));
 
-        #$verifica = ReservaAreaComum::where("RESERVA_AREA_DATA_RESERVA", "=", $req);
+        $reserva = new ReservaAreaComum; 
+
+        $verifica = ReservaAreaComum::where("RESERVA_AREA_DATA_RESERVA", "=", $reserva->inverteData($request->data_reserva))->where("RESERVA_AREA_FK_ID_AREA", "=", $request->area)->get();        
+
+        if(count($verifica) == 1)
+        {
+            Session::flash('error', 'Já existe uma reserva nessa data!');        
+
+            //redirect to another page
+            return redirect()->route('reserva.index');
+
+        }
 
         $reserva = null;
 
